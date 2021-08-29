@@ -8,9 +8,10 @@
     />
   </div>
   <p v-else>
-    <a :href="data.href" target="_blank" rel="noopener noreferrer">{{
-      data.name
-    }}</a>
+    <a :href="data.href" target="_blank" rel="noopener noreferrer">
+      <img :src="data.icon" />
+      {{ data.name }}</a
+    >
   </p>
 </template>
 
