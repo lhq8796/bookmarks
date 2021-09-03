@@ -1,20 +1,63 @@
 <template>
-  <TreeBookmarks :data="bookmarks" />
+  <el-input v-model="filterText" placeholder="输入关键字进行过滤"> </el-input>
+  <el-tree
+    ref="tree"
+    :filter-node-method="filterNode"
+    :data="bookmarks"
+    :props="props"
+  >
+    <template #default="{ node, data }">
+      <template v-if="!data.children">
+        <el-link
+          type="primary"
+          :href="data.href"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>
+            <img :src="data.icon" />
+            {{ node.label }}
+          </span>
+        </el-link>
+      </template>
+      <template v-else>
+        {{ node.label }}
+      </template>
+    </template>
+  </el-tree>
 </template>
 
 <script>
 import bookmarks from "@/assets/json/bookmarks";
-import TreeBookmarks from "@/components/TreeBookmarks";
+import { ElTree, ElLink, ElInput } from "element-plus";
 
 export default {
   name: "Bookmarks",
   components: {
-    TreeBookmarks,
+    ElTree,
+    ElLink,
+    ElInput,
   },
   data() {
     return {
-      bookmarks,
+      filterText: "",
+      bookmarks: [bookmarks],
+      props: Object.freeze({
+        expandTrigger: "hover",
+        label: "name",
+      }),
     };
+  },
+  watch: {
+    filterText(val) {
+      this.$refs.tree.filter(val);
+    },
+  },
+  methods: {
+    filterNode(value, data) {
+      if (!value) return true;
+      return data.name.indexOf(value) !== -1;
+    },
   },
 };
 </script>
