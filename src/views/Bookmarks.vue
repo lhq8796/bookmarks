@@ -14,8 +14,8 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span>
-            <img :src="data.icon" />
+          <span class="flex items-center">
+            <img v-if="data.icon" :src="data.icon" class="mr-2" />
             {{ node.label }}
           </span>
         </el-link>
