@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import request from "@/utils/request";
 import { ElTree, ElLink, ElInput } from "element-plus";
 
 export default {
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     initData() {
-      axios.get("/json/bookmarks.json").then((res) => {
+      request.get("/json/bookmarks.json").then((res) => {
         this.bookmarks = res.data;
       });
     },
