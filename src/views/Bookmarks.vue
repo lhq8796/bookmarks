@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import bookmarks from "@/assets/json/bookmarks";
+import axios from "axios";
 import { ElTree, ElLink, ElInput } from "element-plus";
 
 export default {
@@ -41,7 +41,7 @@ export default {
   data() {
     return {
       filterText: "",
-      bookmarks: [bookmarks],
+      bookmarks: [],
       props: Object.freeze({
         expandTrigger: "hover",
         label: "name",
@@ -53,7 +53,15 @@ export default {
       this.$refs.tree.filter(val);
     },
   },
+  created() {
+    this.initData();
+  },
   methods: {
+    initData() {
+      axios.get("/json/bookmarks.json").then((res) => {
+        this.bookmarks = res.data;
+      });
+    },
     filterNode(value, data) {
       if (!value) return true;
       return data.name.indexOf(value) !== -1;
