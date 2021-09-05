@@ -30,6 +30,7 @@
 <script>
 import request from "@/utils/request";
 import { ElTree, ElLink, ElInput } from "element-plus";
+import { ref } from "@vue/reactivity";
 
 export default {
   name: "Bookmarks",
@@ -38,10 +39,22 @@ export default {
     ElLink,
     ElInput,
   },
+  setup() {
+    const bookmarks = ref([]);
+    const initData = () => {
+      request.get("/json/bookmarks.json").then((res) => {
+        bookmarks.value = res.data;
+      });
+    };
+    initData();
+
+    return {
+      bookmarks,
+    };
+  },
   data() {
     return {
       filterText: "",
-      bookmarks: [],
       props: Object.freeze({
         expandTrigger: "hover",
         label: "name",
@@ -53,15 +66,7 @@ export default {
       this.$refs.tree.filter(val);
     },
   },
-  created() {
-    this.initData();
-  },
   methods: {
-    initData() {
-      request.get("/json/bookmarks.json").then((res) => {
-        this.bookmarks = res.data;
-      });
-    },
     filterNode(value, data) {
       if (!value) return true;
       return data.name.indexOf(value) !== -1;
