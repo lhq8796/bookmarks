@@ -3,8 +3,8 @@
     <h2>{{ data.name }}</h2>
     <TreeBookmarks
       v-for="item of data.children"
-      :data="item"
       :key="uniqueId(item.name + '-')"
+      :data="item"
     />
   </div>
   <p v-else>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-var uniqueId = require("lodash/uniqueId");
+import { uniqueId } from "lodash-es";
 
 export default {
   name: "TreeBookmarks",
