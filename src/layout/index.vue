@@ -3,9 +3,8 @@
     <el-col class="hidden-md-and-down" :lg="3" :xl="6"><div></div></el-col>
     <el-col :md="24" :lg="18" :xl="12">
       <el-menu :default-active="activeIndex" mode="horizontal" router>
-        <el-menu-item index="/">首页</el-menu-item>
-        <el-menu-item index="/about">关于</el-menu-item>
         <el-menu-item index="/bookmarks">书签</el-menu-item>
+        <el-menu-item index="/about">关于</el-menu-item>
       </el-menu>
       <router-view
     /></el-col>
@@ -15,6 +14,7 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { useRoute } from "vue-router";
 import { ElMenu, ElMenuItem, ElRow, ElCol } from "element-plus";
 export default defineComponent({
   name: "Layout",
@@ -25,7 +25,9 @@ export default defineComponent({
     ElCol,
   },
   setup() {
-    const activeIndex = ref("1");
+    const route = useRoute();
+    const activeIndex = ref(route.matched[0].path);
+
     return {
       activeIndex,
     };

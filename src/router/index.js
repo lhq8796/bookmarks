@@ -4,19 +4,23 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import Layout from "@/layout";
 
 /* Views */
-import Home from "../views/Home.vue";
 const NotFound = () =>
   import(/* webpackChunkName: "404" */ "@/views/error-page/404.vue");
 
 const routes = [
   {
     path: "/",
+    redirect: "/bookmarks",
+  },
+  {
+    path: "/bookmarks",
     component: Layout,
     children: [
       {
         path: "",
-        component: Home,
-        name: "Home",
+        name: "Bookmarks",
+        component: () =>
+          import(/* webpackChunkName: "bookmarks" */ "../views/Bookmarks.vue"),
       },
     ],
   },
@@ -32,18 +36,6 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/About.vue"),
-      },
-    ],
-  },
-  {
-    path: "/bookmarks",
-    component: Layout,
-    children: [
-      {
-        path: "",
-        name: "Bookmarks",
-        component: () =>
-          import(/* webpackChunkName: "bookmarks" */ "../views/Bookmarks.vue"),
       },
     ],
   },
