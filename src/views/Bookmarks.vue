@@ -1,43 +1,16 @@
 <template>
-  <el-input v-model="filterText" placeholder="输入关键字进行过滤"> </el-input>
-  <el-tree
-    ref="tree"
-    :filter-node-method="filterNode"
-    :data="bookmarks"
-    :props="props"
-  >
-    <template #default="{ node, data }">
-      <template v-if="!data.children">
-        <el-link
-          type="primary"
-          :href="data.href"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span class="flex items-center">
-            <img v-if="data.icon" :src="data.icon" class="mr-2" />
-            {{ node.label }}
-          </span>
-        </el-link>
-      </template>
-      <template v-else>
-        {{ node.label }}
-      </template>
-    </template>
-  </el-tree>
+  <TreeBookmarks v-for="item of bookmarks" :key="item.name" :data="item" />
 </template>
 
 <script>
 import request from "@/utils/request";
-import { ElTree, ElLink, ElInput } from "element-plus";
-import { ref } from "@vue/reactivity";
+import { ref } from "vue";
+import TreeBookmarks from "@/components/TreeBookmarks";
 
 export default {
   name: "Bookmarks",
   components: {
-    ElTree,
-    ElLink,
-    ElInput,
+    TreeBookmarks,
   },
   setup() {
     const bookmarks = ref([]);
