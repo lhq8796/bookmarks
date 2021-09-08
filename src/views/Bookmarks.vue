@@ -1,5 +1,10 @@
 <template>
-  <TreeBookmarks v-for="item of bookmarks" :key="item.name" :data="item" />
+  <TreeBookmarks
+    v-for="item of bookmarks"
+    :key="item.name"
+    class="mb-4 last-mb-0"
+    :data="item"
+  />
 </template>
 
 <script>
@@ -47,3 +52,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.last-mb-0:last-child {
+  margin-bottom: 0;
+}
+</style>
