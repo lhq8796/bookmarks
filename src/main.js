@@ -4,5 +4,6 @@ import router from "./router";
 import store from "./store";
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/display.css";
+import "tailwindcss/tailwind.css";
 
 createApp(App).use(store).use(router).mount("#app");
