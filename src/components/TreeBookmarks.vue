@@ -1,33 +1,33 @@
 <template>
-  <el-collapse v-model="activeNames">
-    <el-collapse-item
-      v-for="item of data"
+  <template v-for="item of data">
+    <el-card
+      v-if="item.type === 1"
       :key="item.name"
-      :title="item.name"
-      :name="item.name"
+      :header="item.name"
+      class="mb-4 last:mb-0"
     >
-      <div v-for="child of item.children" :key="child.name">
-        <el-link :href="child.href" target="_blank" rel="noopener noreferrer">
-          <span class="flex items-center">
-            <img v-if="child.icon" :src="child.icon" class="mr-2" />
-            {{ child.name }}
-          </span>
-        </el-link>
-      </div>
-    </el-collapse-item>
-  </el-collapse>
+      <TreeBookmarks :data="item.children" />
+    </el-card>
+    <div v-else-if="item.type === 2" :key="item.name">
+      <el-link :href="item.href" target="_blank" rel="noopener noreferrer">
+        <span class="flex items-center">
+          <img v-if="item.icon" :src="item.icon" class="mr-2" />
+          {{ item.name }}
+        </span>
+      </el-link>
+    </div>
+  </template>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
-import { ElLink, ElCollapse, ElCollapseItem } from "element-plus";
+import { ElLink, ElCard } from "element-plus";
 
 export default defineComponent({
   name: "TreeBookmarks",
   components: {
     ElLink,
-    ElCollapse,
-    ElCollapseItem,
+    ElCard,
   },
   props: {
     data: {
