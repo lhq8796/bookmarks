@@ -18,24 +18,32 @@ const routes = [
     children: [
       {
         path: "",
-        name: "Bookmarks",
+        name: "bookmarks",
         component: () =>
           import(/* webpackChunkName: "bookmarks" */ "../views/Bookmarks.vue"),
       },
     ],
   },
   {
-    path: "/about",
+    path: "/demo",
     component: Layout,
     children: [
       {
         path: "",
-        name: "About",
+        name: "demo",
         // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
+        // this generates a separate chunk (demo.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () =>
-          import(/* webpackChunkName: "about" */ "../views/About.vue"),
+          import(/* webpackChunkName: "demo" */ "../views/demo/index.vue"),
+      },
+      {
+        path: "js-mvc",
+        name: "demo_js-mvc",
+        component: () =>
+          import(
+            /* webpackChunkName: "demo_js-mvc" */ "../views/demo/js-mvc.vue"
+          ),
       },
     ],
   },
