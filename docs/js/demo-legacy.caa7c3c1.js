@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["demo"],{"46a4":function(e,n,t){"use strict";t.r(n);var c=t("7a23"),r=Object(c["n"])("用纯 JavaScript 撸一个 MVC 框架");function o(e,n,t,o,a,u){var i=Object(c["L"])("el-link");return Object(c["F"])(),Object(c["j"])(i,{underline:!1,onClick:n[0]||(n[0]=function(n){return e.$router.push({path:"/demo/js-mvc"})})},{default:Object(c["S"])((function(){return[r]})),_:1})}var a=t("3344"),u=Object(c["p"])({name:"Demo",components:{ElLink:a["a"]}});u.render=o;n["default"]=u}}]);
+//# sourceMappingURL=demo-legacy.caa7c3c1.js.map
