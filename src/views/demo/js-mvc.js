@@ -3,10 +3,11 @@ export class Model {
   constructor() {
     // The state of the model, an array of todo objects, prepopulated with some data
 
-    this.todos = [
-      { id: 1, text: 'Run a marathon', complete: false },
-      { id: 2, text: 'Plant a garden', complete: false },
-    ]
+    this.todos = JSON.parse(localStorage.getItem('todos')) || []
+  }
+
+  update() {
+    localStorage.setItem('todos', JSON.stringify(this.todos))
   }
 
   // Append a todo to the todos array
@@ -14,6 +15,7 @@ export class Model {
     this.todos = [...this.todos, todo]
     console.log(this.todos)
 
+    this.update()
     this.onTodoListChanged(this.todos)
   }
 
@@ -24,12 +26,14 @@ export class Model {
         ? { id: todo.id, text: updatedText, complete: todo.complete }
         : todo
     })
+    this.update()
     this.onTodoListChanged(this.todos)
   }
 
   // Filter a todo out of the array by id
   deleteTodo(id) {
     this.todos = this.todos.filter(todo => todo.id !== id)
+    this.update()
     this.onTodoListChanged(this.todos)
   }
 
@@ -40,6 +44,7 @@ export class Model {
         ? { id: todo.id, text: todo.text, complete: !todo.complete }
         : todo
     })
+    this.update()
     this.onTodoListChanged(this.todos)
   }
 
@@ -151,6 +156,11 @@ export class View {
   bindEvents(controller) {
     this.form.addEventListener('submit', controller.handleAddTodo)
     this.todoList.addEventListener('click', controller.handleDeleteTodo)
+    this.todoList.addEventListener('input', controller.handleEditTodo)
+    this.todoList.addEventListener(
+      'focusout',
+      controller.handleEditTodoComplete
+    )
     this.todoList.addEventListener('change', controller.handleToggle)
   }
 }
@@ -165,6 +175,8 @@ export class Controller {
 
     this.model.bindEvents(this)
     this.view.bindEvents(this)
+
+    this.temporaryEditValue = ''
   }
 
   onTodoListChanged = todos => {
@@ -205,6 +217,23 @@ export class Controller {
       const id = parseInt(event.target.parentElement.id)
 
       this.model.toggleTodo(id)
+    }
+  }
+
+  // Update temporary state
+  handleEditTodo = event => {
+    if (event.target.className === 'editable') {
+      this.temporaryEditValue = event.target.innerText
+    }
+  }
+
+  // Send the completed value to the model
+  handleEditTodoComplete = event => {
+    if (this.temporaryEditValue) {
+      const id = parseInt(event.target.parentElement.id)
+
+      this.model.editTodo(id, this.temporaryEditValue)
+      this.temporaryEditValue = ''
     }
   }
 }
