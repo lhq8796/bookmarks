@@ -1,2 +1,2 @@
 (window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["404"],{"1db4":function(n,e,o){"use strict";function r(n,e,o,r,t,u){return"404"}o.r(e);var t={name:"NotFound"};t.render=r;e["default"]=t}}]);
-//# sourceMappingURL=404-legacy.229ddd73.js.map
+//# sourceMappingURL=404-legacy.b8368d03.js.map
