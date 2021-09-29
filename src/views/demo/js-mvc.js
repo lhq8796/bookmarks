@@ -40,7 +40,7 @@ export class Model {
   // Flip the complete boolean on the specified todo
   toggleTodo(id) {
     this.todos = this.todos.map(todo => {
-      todo.id === id
+      return todo.id === id
         ? { id: todo.id, text: todo.text, complete: !todo.complete }
         : todo
     })
