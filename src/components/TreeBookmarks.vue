@@ -1,14 +1,14 @@
 <template>
   <template v-for="item of data">
     <el-card
-      v-if="item.type === 1"
+      v-if="item.children"
       :key="item.name"
       :header="item.name"
       class="mb-4 last:mb-0"
     >
       <TreeBookmarks :data="item.children" />
     </el-card>
-    <div v-else-if="item.type === 2" :key="item.name">
+    <div v-else-if="!item.children" :key="item.name">
       <el-link :href="item.href" target="_blank" rel="noopener noreferrer">
         <span class="flex items-center">
           <img v-if="item.icon" :src="item.icon" class="mr-2" />
@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-import { ElLink, ElCard } from "element-plus";
+import { defineComponent, ref } from 'vue'
+import { ElLink, ElCard } from 'element-plus'
 
 export default defineComponent({
-  name: "TreeBookmarks",
+  name: 'TreeBookmarks',
   components: {
     ElLink,
     ElCard,
@@ -36,9 +36,9 @@ export default defineComponent({
     },
   },
   setup() {
-    const activeNames = ref([]);
+    const activeNames = ref([])
 
-    return { activeNames };
+    return { activeNames }
   },
-});
+})
 </script>
