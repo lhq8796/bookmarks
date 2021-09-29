@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-import { useRoute } from "vue-router";
+import { defineComponent, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import {
   ElMenu,
   ElMenuItem,
@@ -46,9 +46,9 @@ import {
   ElFooter,
   ElMain,
   ElLink,
-} from "element-plus";
+} from 'element-plus'
 export default defineComponent({
-  name: "Layout",
+  name: 'Layout',
   components: {
     ElMenu,
     ElMenuItem,
@@ -61,12 +61,12 @@ export default defineComponent({
     ElLink,
   },
   setup() {
-    const route = useRoute();
-    const activeIndex = ref(route.matched[0].path);
+    const route = useRoute()
+    const activeIndex = ref(route.matched[0].path)
 
     return {
       activeIndex,
-    };
+    }
   },
-});
+})
 </script>

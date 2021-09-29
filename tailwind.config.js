@@ -1,9 +1,9 @@
 module.exports = {
   purge: [
-    "./src/**/*.html",
-    "./src/**/*.vue",
-    "./src/**/*.jsx",
-    "./src/**/*.js",
+    './src/**/*.html',
+    './src/**/*.vue',
+    './src/**/*.jsx',
+    './src/**/*.js',
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -11,8 +11,8 @@ module.exports = {
   },
   variants: {
     extend: {
-      margin: ["last"],
+      margin: ['last'],
     },
   },
   plugins: [],
-};
+}

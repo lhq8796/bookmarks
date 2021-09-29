@@ -5,13 +5,13 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import { ElLink } from "element-plus";
+import { defineComponent } from 'vue'
+import { ElLink } from 'element-plus'
 
 export default defineComponent({
-  name: "Demo",
+  name: 'Demo',
   components: {
     ElLink,
   },
-});
+})
 </script>
